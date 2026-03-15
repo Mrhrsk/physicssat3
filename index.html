@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics 12 — Term 3 Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0f14;
+  --surface: #141820;
+  --surface2: #1a1f2b;
+  --border: #2a3040;
+  --text: #d4d8e0;
+  --text-dim: #8090a8;
+  --accent: #4ecdc4;
+  --accent2: #ff6b6b;
+  --accent3: #ffd93d;
+  --accent4: #6c5ce7;
+  --unit-a: #4ecdc4;
+  --unit-b: #ffd93d;
+  --unit-c: #ff6b6b;
+  --formula-bg: #1e2433;
+  --success: #2ecc71;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; font-size: 17px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+::selection { background: var(--accent); color: var(--bg); }
+
+/* NAV */
+.topnav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(12,15,20,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display:flex; align-items:center; gap:1rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.82rem;
+}
+.topnav .logo { font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--accent); letter-spacing:1px; white-space:nowrap; }
+.topnav a { color:var(--text-dim); text-decoration:none; padding:0.3rem 0.6rem; border-radius:4px; transition:0.2s; white-space:nowrap; }
+.topnav a:hover { color:var(--text); background:var(--surface2); }
+.topnav .unit-a { border-left:2px solid var(--unit-a); padding-left:0.5rem; }
+.topnav .unit-b { border-left:2px solid var(--unit-b); padding-left:0.5rem; }
+.topnav .unit-c { border-left:2px solid var(--unit-c); padding-left:0.5rem; }
+.nav-scroll { display:flex; gap:0.5rem; overflow-x:auto; flex:1; }
+
+/* HERO */
+.hero {
+  margin-top:3.5rem;
+  padding:4rem 2rem 3rem;
+  text-align:center;
+  background: linear-gradient(135deg, #0c0f14 0%, #141830 50%, #0c0f14 100%);
+  border-bottom:1px solid var(--border);
+}
+.hero h1 { font-family:'Source Serif 4',serif; font-size:2.8rem; font-weight:700; margin-bottom:0.5rem; }
+.hero h1 span { color:var(--accent); }
+.hero p { color:var(--text-dim); max-width:600px; margin:0 auto; font-size:0.95rem; }
+.hero .tags { display:flex; gap:0.6rem; justify-content:center; margin-top:1.2rem; flex-wrap:wrap; }
+.hero .tag { font-family:'IBM Plex Mono',monospace; font-size:0.72rem; padding:0.25rem 0.7rem; border-radius:20px; border:1px solid var(--border); color:var(--text-dim); }
+.hero .tag.a { border-color:var(--unit-a); color:var(--unit-a); }
+.hero .tag.b { border-color:var(--unit-b); color:var(--unit-b); }
+.hero .tag.c { border-color:var(--unit-c); color:var(--unit-c); }
+
+/* MAIN */
+.container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+/* UNIT HEADER */
+.unit-header {
+  padding: 2rem 0 1rem;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 2rem;
+}
+.unit-header h2 {
+  font-family:'Source Serif 4',serif; font-size:2rem; font-weight:700;
+}
+.unit-header.a h2 { color:var(--unit-a); }
+.unit-header.b h2 { color:var(--unit-b); }
+.unit-header.c h2 { color:var(--unit-c); }
+.unit-header p { color:var(--text-dim); margin-top:0.3rem; font-size:0.9rem; }
+
+/* SECTION */
+.section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+.section h3 {
+  font-family:'Source Serif 4',serif;
+  font-size:1.35rem;
+  margin-bottom:1rem;
+  padding-bottom:0.5rem;
+  border-bottom:1px solid var(--border);
+}
+.section h4 {
+  font-family:'DM Sans',sans-serif;
+  font-size:1rem;
+  font-weight:700;
+  color:var(--accent);
+  margin:1.2rem 0 0.5rem;
+}
+.section p { margin-bottom:0.8rem; }
+.section ul, .section ol { margin:0.5rem 0 1rem 1.5rem; }
+.section li { margin-bottom:0.4rem; }
+
+.lo-tag {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.68rem;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  padding:0.15rem 0.5rem;
+  border-radius:4px;
+  color:var(--text-dim);
+  display:inline-block;
+  margin-bottom:0.5rem;
+}
+
+/* FORMULA BOX */
+.formula {
+  background: var(--formula-bg);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.2rem;
+  border-radius: 0 6px 6px 0;
+  margin: 1rem 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.95rem;
+  overflow-x:auto;
+}
+.formula.important { border-left-color: var(--accent2); }
+.formula.note { border-left-color: var(--accent3); }
+
+/* KEY POINT */
+.key {
+  background: rgba(78,205,196,0.08);
+  border:1px solid rgba(78,205,196,0.2);
+  padding:0.8rem 1rem;
+  border-radius:6px;
+  margin:0.8rem 0;
+  font-size:0.92rem;
+}
+.key.warn {
+  background: rgba(255,107,107,0.08);
+  border-color: rgba(255,107,107,0.25);
+}
+.key.tip {
+  background: rgba(255,217,61,0.08);
+  border-color: rgba(255,217,61,0.2);
+}
+.key strong { color:var(--accent); }
+.key.warn strong { color:var(--accent2); }
+.key.tip strong { color:var(--accent3); }
+
+/* TABLE */
+.info-table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.88rem; }
+.info-table th { background:var(--surface2); color:var(--accent); font-weight:600; text-align:left; padding:0.6rem 0.8rem; border:1px solid var(--border); }
+.info-table td { padding:0.5rem 0.8rem; border:1px solid var(--border); }
+.info-table tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+
+/* COLLAPSIBLE */
+details { margin:0.8rem 0; }
+details summary {
+  cursor:pointer; font-weight:700; color:var(--accent3);
+  padding:0.4rem 0;
+  font-size:0.95rem;
+  list-style:none;
+}
+details summary::before { content:'▸ '; }
+details[open] summary::before { content:'▾ '; }
+details > div { padding:0.5rem 0 0.5rem 1rem; border-left:2px solid var(--border); margin-top:0.3rem; }
+
+/* TOC */
+.toc { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:1.5rem; margin-bottom:2rem; }
+.toc h3 { font-family:'Source Serif 4',serif; margin-bottom:0.8rem; border:none; padding:0; }
+.toc ul { list-style:none; margin:0; padding:0; }
+.toc li { margin:0.3rem 0; }
+.toc a { color:var(--text-dim); text-decoration:none; font-size:0.9rem; transition:0.2s; }
+.toc a:hover { color:var(--accent); }
+.toc .toc-unit { font-weight:700; margin-top:0.8rem; font-size:0.95rem; }
+.toc .toc-unit.a { color:var(--unit-a); }
+.toc .toc-unit.b { color:var(--unit-b); }
+.toc .toc-unit.c { color:var(--unit-c); }
+
+/* CONSTANTS BOX */
+.constants {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1.2rem 1.5rem;
+  margin-bottom:2rem;
+}
+.constants h3 { font-family:'IBM Plex Mono',monospace; color:var(--accent); font-size:0.9rem; margin-bottom:0.6rem; }
+.const-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:0.3rem 1.5rem; font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:var(--text-dim); }
+
+@media(max-width:700px){
+  html { font-size:15px; }
+  .hero h1 { font-size:1.8rem; }
+  .container { padding:1rem; }
+  .section { padding:1.2rem; }
+  .topnav { font-size:0.72rem; padding:0.4rem 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="logo">PHY12·T3</span>
+  <div class="nav-scroll">
+    <a href="#toc">Contents</a>
+    <a href="#unit-a" class="unit-a">Charged Particles</a>
+    <a href="#unit-b" class="unit-b">Quantum Physics</a>
+    <a href="#unit-c" class="unit-c">Nuclear Physics</a>
+    <a href="#constants">Constants</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>Physics 12 — <span>Term 3</span></h1>
+  <p>Complete study guide for the summative assessment. Covers charged particles, quantum physics, and nuclear physics.</p>
+  <div class="tags">
+    <span class="tag a">12.3A Charged Particles</span>
+    <span class="tag b">12.3B Quantum Physics</span>
+    <span class="tag c">12.3C Nuclear Physics</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- CONSTANTS -->
+<div class="constants" id="constants">
+  <h3>KEY CONSTANTS & VALUES</h3>
+  <div class="const-grid">
+    <span>h = 6.63 × 10⁻³⁴ J·s</span>
+    <span>c = 3.00 × 10⁸ m/s</span>
+    <span>e = 1.60 × 10⁻¹⁹ C</span>
+    <span>mₑ = 9.11 × 10⁻³¹ kg</span>
+    <span>mₚ = 1.673 × 10⁻²⁷ kg</span>
+    <span>mₙ = 1.675 × 10⁻²⁷ kg</span>
+    <span>1 eV = 1.60 × 10⁻¹⁹ J</span>
+    <span>1 u = 1.661 × 10⁻²⁷ kg</span>
+    <span>1 u ≈ 931.5 MeV</span>
+    <span>Nₐ = 6.02 × 10²³ mol⁻¹</span>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc" id="toc">
+  <h3>Table of Contents</h3>
+  <ul>
+    <li class="toc-unit a">Unit A — Charged Particles</li>
+    <li><a href="#a1">Quantisation of Charge (Millikan's Experiment)</a></li>
+    <li><a href="#a2">Deflection of Charged Particles in E & B Fields</a></li>
+    <li><a href="#a3">Velocity Selectors & Determining v, e/mₑ</a></li>
+    <li><a href="#a4">Quarks, Hadrons, Leptons</a></li>
+    <li class="toc-unit b">Unit B — Quantum Physics</li>
+    <li><a href="#b1">Photon Energy: E = hf</a></li>
+    <li><a href="#b2">The Photoelectric Effect</a></li>
+    <li><a href="#b3">Work Function & Intensity vs Frequency</a></li>
+    <li><a href="#b4">Einstein's Photoelectric Equation</a></li>
+    <li><a href="#b5">de Broglie Wavelength</a></li>
+    <li><a href="#b6">Emission & Absorption Line Spectra</a></li>
+    <li><a href="#b7">Energy Levels & hf = E₁ − E₂</a></li>
+    <li><a href="#b8">Bohr's Postulates & Atomic Stability</a></li>
+    <li class="toc-unit c">Unit C — Nuclear Physics</li>
+    <li><a href="#c1">α-Particle Scattering & The Nucleus</a></li>
+    <li><a href="#c2">Conservation Laws & Nuclear Equations</a></li>
+    <li><a href="#c3">Nature of α, β, γ Radiations</a></li>
+    <li><a href="#c4">β Decay & the Quark Model</a></li>
+    <li><a href="#c5">Spontaneous & Random Decay</a></li>
+    <li><a href="#c6">Mass-Energy, Mass Defect & Binding Energy</a></li>
+    <li><a href="#c7">Fission & Fusion via Binding Energy</a></li>
+    <li><a href="#c8">Activity, Decay Constant & Half-Life</a></li>
+  </ul>
+</div>
+
+<!-- ======================== UNIT A ======================== -->
+<div class="unit-header a" id="unit-a">
+  <h2>Unit A — Charged Particles</h2>
+  <p>Quantisation of charge, deflection in fields, particle classification</p>
+</div>
+
+<!-- A1 -->
+<div class="section" id="a1">
+  <span class="lo-tag">12.2.1.2</span>
+  <h3>Quantisation of Charge — Millikan's Experiment</h3>
+
+  <h4>The idea</h4>
+  <p>Electric charge comes in discrete packets. You can never find a charge of 0.5e or 2.7e — it's always an integer multiple of the elementary charge <strong>e = 1.60 × 10⁻¹⁹ C</strong>.</p>
+
+  <h4>Millikan's oil drop experiment</h4>
+  <p>Tiny charged oil drops are suspended between two parallel plates. By adjusting the voltage until the electric force balances gravity, you can calculate the charge on each drop. The key findings:</p>
+  <ul>
+    <li>All measured charges are integer multiples of a smallest value</li>
+    <li>That smallest value is <strong>e ≈ 1.6 × 10⁻¹⁹ C</strong></li>
+    <li>This proves charge is <strong>quantised</strong> (discrete, not continuous)</li>
+  </ul>
+
+  <div class="key">
+    <strong>Exam approach:</strong> Given a set of charge values on oil drops (like 3.2, 6.4, 9.7, 16, 12.8, 3.1, 6.3 × 10⁻¹⁹ C), find the <em>greatest common divisor</em>. All values should be approximately integer multiples of the fundamental charge. Here: all are roughly multiples of <strong>3.2 × 10⁻¹⁹ C</strong> (which is 2e).
+  </div>
+
+  <p>When the drop is stationary (in equilibrium):</p>
+  <div class="formula">
+Electric force = Weight
+qE = mg
+q(V/d) = mg
+q = mgd / V
+  </div>
+  <p>where V = voltage between plates, d = plate separation, m = mass of drop, g = gravitational acceleration.</p>
+</div>
+
+<!-- A2 -->
+<div class="section" id="a2">
+  <span class="lo-tag">12.2.1.3</span>
+  <h3>Deflection of Charged Particles in E & B Fields</h3>
+
+  <h4>In an electric field (between parallel plates)</h4>
+  <ul>
+    <li>Positive charges deflect <strong>towards the negative plate</strong></li>
+    <li>Negative charges deflect <strong>towards the positive plate</strong></li>
+    <li>Uncharged particles (γ-rays) are <strong>not deflected</strong></li>
+    <li>The deflection depends on charge/mass ratio — lighter particles (β) deflect much more than heavier ones (α)</li>
+  </ul>
+
+  <h4>In a magnetic field</h4>
+  <ul>
+    <li>Force is perpendicular to both velocity and B-field: <strong>F = qvB</strong> (when v ⊥ B)</li>
+    <li>This causes circular motion, not straight-line deflection</li>
+    <li>Positive and negative charges curve in <strong>opposite directions</strong> (use Fleming's left-hand rule)</li>
+    <li>γ-rays are unaffected</li>
+    <li>α-particles curve less than β-particles (greater mass → greater radius of curvature: r = mv/qB)</li>
+  </ul>
+
+  <div class="key tip">
+    <strong>Fleming's Left-Hand Rule:</strong> Thumb = Force (motion), First finger = Field (B), Second finger = Current (conventional, +ve charge direction). For negative charges, reverse the force direction.
+  </div>
+
+  <h4>Velocity Selector</h4>
+  <p>A velocity selector uses <strong>crossed E and B fields</strong> (perpendicular to each other and to the beam). Only particles with a specific velocity pass through undeflected:</p>
+  <div class="formula">
+Electric force = Magnetic force
+qE = qvB
+v = E / B
+  </div>
+  <p>For positive ions moving to the right: if E points up, B must point <strong>out of the page</strong> (or into, depending on geometry) — so that the electric force (upward) is balanced by the magnetic force (downward). The key is that qE must equal qvB in opposing directions.</p>
+
+  <div class="key warn">
+    <strong>Exam trap (Q6 type):</strong> For positive ions moving right, the E and B fields must produce forces in opposite directions on the ion. Option C in the spec has E upward and B out of the page — this gives electric force up and magnetic force down (by F = qv×B), balancing them.
+  </div>
+</div>
+
+<!-- A3 -->
+<div class="section" id="a3">
+  <span class="lo-tag">12.2.1.5</span>
+  <h3>Determining v and e/mₑ for Electrons</h3>
+
+  <h4>Cathode Ray Tube (CRT) Method</h4>
+  <p>This is the standard method to determine both velocity and the specific charge (e/mₑ) of electrons:</p>
+  <ol>
+    <li>Electrons are emitted from a heated cathode (thermionic emission)</li>
+    <li>They're accelerated through a known potential difference V</li>
+    <li>The kinetic energy gained equals the electrical energy: <strong>eV = ½mv²</strong></li>
+    <li>From this: <strong>v = √(2eV/m)</strong></li>
+  </ol>
+
+  <h4>Finding e/mₑ</h4>
+  <p>Once the electrons enter a magnetic field B, they follow a circular path of radius r:</p>
+  <div class="formula">
+qvB = mv²/r   (magnetic force = centripetal force)
+e/mₑ = v/(Br)
+
+Combined with eV = ½mv²:
+e/mₑ = 2V/(B²r²)
+  </div>
+
+  <div class="key">
+    <strong>Key idea:</strong> The CRT method uses an electric field to accelerate electrons to known energy, then a magnetic field to bend them. By measuring the radius of curvature and knowing V and B, you get e/mₑ ≈ 1.76 × 10¹¹ C/kg.
+  </div>
+</div>
+
+<!-- A4 -->
+<div class="section" id="a4">
+  <span class="lo-tag">12.2.1.6 → 12.2.1.9</span>
+  <h3>Quarks, Hadrons & Leptons</h3>
+
+  <h4>Two families of particles</h4>
+  <table class="info-table">
+    <tr><th>Property</th><th>Hadrons</th><th>Leptons</th></tr>
+    <tr><td>Affected by strong nuclear force?</td><td><strong>Yes</strong></td><td>No</td></tr>
+    <tr><td>Made of quarks?</td><td><strong>Yes</strong></td><td>No — they are fundamental</td></tr>
+    <tr><td>Examples</td><td>Proton, Neutron, Pion</td><td><strong>Electron, Neutrino</strong></td></tr>
+    <tr><td>Sub-types</td><td>Baryons (3 quarks) & Mesons (quark + antiquark)</td><td>6 types + antiparticles</td></tr>
+  </table>
+
+  <h4>The Quark Model</h4>
+  <table class="info-table">
+    <tr><th>Quark</th><th>Symbol</th><th>Charge</th><th>Antiquark charge</th></tr>
+    <tr><td>Up</td><td>u</td><td>+⅔ e</td><td>−⅔ e</td></tr>
+    <tr><td>Down</td><td>d</td><td>−⅓ e</td><td>+⅓ e</td></tr>
+    <tr><td>Strange</td><td>s</td><td>−⅓ e</td><td>+⅓ e</td></tr>
+  </table>
+
+  <div class="formula">
+Proton  = u u d → charge: +⅔ +⅔ −⅓ = +1e  ✓
+Neutron = u d d → charge: +⅔ −⅓ −⅓ = 0    ✓
+  </div>
+
+  <div class="key">
+    <strong>Remember:</strong> Electrons and neutrinos are <strong>leptons</strong>. They are NOT made of quarks. Protons and neutrons are <strong>hadrons</strong> (specifically baryons), and they ARE made of quarks.
+  </div>
+
+  <p>The <strong>weak nuclear force</strong> (weak interaction) acts on both quarks and leptons, and is responsible for β-decay. The <strong>strong nuclear force</strong> holds quarks together inside hadrons and holds nucleons together in the nucleus.</p>
+</div>
+
+
+<!-- ======================== UNIT B ======================== -->
+<div class="unit-header b" id="unit-b">
+  <h2>Unit B — Quantum Physics</h2>
+  <p>Photons, photoelectric effect, de Broglie, energy levels, spectra</p>
+</div>
+
+<!-- B1 -->
+<div class="section" id="b1">
+  <span class="lo-tag">12.2.2.2</span>
+  <h3>Photon Energy: E = hf</h3>
+
+  <p>Electromagnetic radiation is not a smooth wave — it comes in discrete packets called <strong>photons</strong>. Each photon carries an energy that depends on its frequency:</p>
+
+  <div class="formula">
+E = hf
+
+Also, since c = fλ:
+E = hc / λ
+  </div>
+
+  <p>where h = 6.63 × 10⁻³⁴ J·s (Planck constant), f = frequency (Hz), λ = wavelength (m).</p>
+
+  <h4>The electronvolt (eV)</h4>
+  <p>Photon energies are tiny in joules, so we often use <strong>electronvolts</strong>:</p>
+  <div class="formula">
+1 eV = 1.60 × 10⁻¹⁹ J
+
+To convert J → eV: divide by 1.60 × 10⁻¹⁹
+To convert eV → J: multiply by 1.60 × 10⁻¹⁹
+  </div>
+
+  <details>
+    <summary>Worked example: Energy of a photon with f = 5.0 × 10¹⁴ Hz</summary>
+    <div>
+      <p>E = hf = 6.63 × 10⁻³⁴ × 5.0 × 10¹⁴ = <strong>3.315 × 10⁻¹⁹ J ≈ 3.3 × 10⁻¹⁹ J</strong></p>
+    </div>
+  </details>
+
+  <div class="key">
+    <strong>Higher frequency = higher energy.</strong> Gamma photons have the most energy; radio photons the least. Energy is inversely proportional to wavelength.
+  </div>
+</div>
+
+<!-- B2 -->
+<div class="section" id="b2">
+  <span class="lo-tag">12.2.2.6</span>
+  <h3>The Photoelectric Effect</h3>
+
+  <h4>What happens</h4>
+  <p>When electromagnetic radiation (usually UV) shines on a metal surface, electrons can be emitted from the surface. These are called <strong>photoelectrons</strong>.</p>
+
+  <h4>Key observations — evidence for particle nature of light</h4>
+  <ol>
+    <li><strong>Emission is instantaneous</strong> — no time delay between illumination and electron emission</li>
+    <li>There exists a <strong>threshold frequency f₀</strong> — below this frequency, NO electrons are emitted regardless of intensity</li>
+    <li><strong>Increasing intensity</strong> increases the number of photoelectrons (current), NOT their kinetic energy</li>
+    <li><strong>Increasing frequency</strong> (above threshold) increases the maximum kinetic energy of electrons</li>
+    <li>One photon interacts with one electron (one-to-one interaction)</li>
+  </ol>
+
+  <h4>Why wave theory fails</h4>
+  <p>Classical wave theory predicts that any frequency should work if the light is intense enough (more energy delivered by brighter light), and that there should be a delay as electrons "collect" energy. <strong>Both predictions are wrong.</strong> The existence of a threshold frequency and instantaneous emission can only be explained by treating light as photons.</p>
+
+  <h4>Work function (Φ)</h4>
+  <p>The <strong>work function</strong> is the minimum energy needed to remove an electron from the metal surface. It depends only on the type of metal, NOT on the light.</p>
+
+  <div class="formula important">
+At the threshold frequency:
+hf₀ = Φ    (all photon energy goes to just freeing the electron)
+f₀ = Φ / h
+  </div>
+</div>
+
+<!-- B3 -->
+<div class="section" id="b3">
+  <span class="lo-tag">12.2.2.7</span>
+  <h3>Work Function vs Intensity</h3>
+
+  <h4>Why is the work function independent of intensity?</h4>
+  <p>The work function is a property of the <strong>metal</strong> — it's the energy binding the most loosely held surface electrons. It has nothing to do with the light hitting it.</p>
+  <p>Light intensity = number of photons per second. Increasing intensity means MORE photons arrive, but each photon still has the same energy (hf). If hf < Φ, no single photon has enough energy to free an electron, no matter how many arrive.</p>
+
+  <h4>Why is photoelectric current proportional to intensity?</h4>
+  <p>If f ≥ f₀ (photon energy ≥ work function), then each photon can release one electron. More photons per second (higher intensity) → more electrons released per second → more current.</p>
+
+  <div class="key">
+    <strong>Summary:</strong> Work function depends on the <em>energy per photon</em> (frequency). Photoelectric current depends on the <em>number of photons</em> (intensity). These are independent quantities.
+  </div>
+</div>
+
+<!-- B4 -->
+<div class="section" id="b4">
+  <span class="lo-tag">12.2.2.8</span>
+  <h3>Einstein's Photoelectric Equation</h3>
+
+  <div class="formula important">
+hf = Φ + ½mv²ₘₐₓ
+
+Energy of photon = Work function + Max kinetic energy of electron
+  </div>
+
+  <p>This comes directly from conservation of energy. The photon gives ALL its energy to one electron. Some energy (Φ) is used to escape the metal; the rest becomes kinetic energy.</p>
+
+  <h4>Understanding the equation</h4>
+  <ul>
+    <li>If <strong>hf = Φ</strong>: the electron just barely escapes with zero KE (this is the threshold case)</li>
+    <li>If <strong>hf > Φ</strong>: excess energy appears as kinetic energy of the electron</li>
+    <li>If <strong>hf < Φ</strong>: the electron CANNOT escape — no photoelectric effect</li>
+  </ul>
+
+  <h4>The graph of Eₖ(max) vs frequency</h4>
+  <p>The graph is a straight line: Eₖ = hf − Φ</p>
+  <ul>
+    <li><strong>Gradient</strong> = h (Planck constant)</li>
+    <li><strong>x-intercept</strong> = f₀ (threshold frequency)</li>
+    <li><strong>y-intercept</strong> = −Φ (negative work function)</li>
+    <li>For a <strong>different metal with lower work function</strong>: the line shifts <strong>left</strong> (lower threshold frequency) but has the <strong>same gradient</strong> (h is universal)</li>
+  </ul>
+
+  <div class="key tip">
+    <strong>Exam tip for Q20 type:</strong> From the graph, read the threshold frequency where the line crosses the x-axis. To find h, pick two points on the line and calculate gradient = ΔEₖ/Δf. For a lower work function metal, draw a parallel line to the left.
+  </div>
+
+  <h4>Why electrons have a RANGE of kinetic energies</h4>
+  <p>The maximum KE corresponds to electrons at the <strong>surface</strong>. Electrons from <strong>deeper inside</strong> the metal need extra energy to reach the surface first, so they emerge with less KE. This is why the equation gives the <em>maximum</em> KE.</p>
+
+  <details>
+    <summary>Worked example: Q18 type — does a second lamp affect the photoelectric current?</summary>
+    <div>
+      <p>Given: zinc work function Φ = 5.8 × 10⁻¹⁹ J. UV lamp at λ = 120 nm, second lamp at λ = 450 nm.</p>
+      <p>Threshold wavelength: λ₀ = hc/Φ = (6.63×10⁻³⁴ × 3×10⁸) / 5.8×10⁻¹⁹ = 343 nm</p>
+      <p>The UV (120 nm < 343 nm) → above threshold → causes photoelectric effect ✓</p>
+      <p>The visible light (450 nm > 343 nm) → below threshold → <strong>cannot cause any photoelectric emission</strong></p>
+      <p>Therefore: switching on the second lamp has <strong>no effect</strong> on the photoelectric current.</p>
+    </div>
+  </details>
+</div>
+
+<!-- B5 -->
+<div class="section" id="b5">
+  <span class="lo-tag">12.2.2.10</span>
+  <h3>de Broglie Wavelength</h3>
+
+  <p>All matter has wave-like properties. The wavelength associated with a moving particle is:</p>
+  <div class="formula">
+λ = h / p = h / (mv)
+
+λ = de Broglie wavelength (m)
+h = Planck constant
+p = momentum (kg·m/s)
+m = mass, v = velocity
+  </div>
+
+  <p>This was confirmed by <strong>electron diffraction</strong> — electrons fired through thin graphite produce ring patterns, just like wave diffraction. This only works because their wavelength (~10⁻¹⁰ m) is comparable to atomic spacing.</p>
+
+  <h4>Wave–particle duality</h4>
+  <ul>
+    <li>Light travels as a <strong>wave</strong> (diffraction, interference) but interacts as <strong>particles</strong> (photoelectric effect)</li>
+    <li>Electrons travel as <strong>waves</strong> (diffraction) but interact as <strong>particles</strong> (Newtonian mechanics)</li>
+  </ul>
+
+  <details>
+    <summary>Worked example: Q16 — de Broglie wavelength of an electron at 2.0 × 10⁶ m/s</summary>
+    <div>
+      <p>λ = h/(mv) = 6.63×10⁻³⁴ / (9.1×10⁻³¹ × 2.0×10⁶)</p>
+      <p>λ = 6.63×10⁻³⁴ / 1.82×10⁻²⁴ = <strong>3.6 × 10⁻¹⁰ m</strong></p>
+      <p>(Note: the spec has a typo "9.1×10⁻³⁴" in the mark scheme — it should be 10⁻³¹)</p>
+    </div>
+  </details>
+</div>
+
+<!-- B6 -->
+<div class="section" id="b6">
+  <span class="lo-tag">12.2.2.12</span>
+  <h3>Emission & Absorption Line Spectra</h3>
+
+  <h4>Emission line spectrum</h4>
+  <p>A <strong>hot gas at low pressure</strong> produces bright coloured lines on a dark background. Each line corresponds to a specific wavelength emitted when electrons in atoms <strong>drop from higher energy levels to lower ones</strong>, releasing photons.</p>
+
+  <h4>Absorption line spectrum</h4>
+  <p>When <strong>white light passes through a cool gas</strong>, certain wavelengths are missing (dark lines on a continuous rainbow background). The cool gas atoms absorb photons whose energy exactly matches the gap between energy levels, causing electrons to <strong>jump up</strong> to higher levels.</p>
+
+  <h4>Why absorption lines match emission lines</h4>
+  <p>The absorbed wavelengths are the same as the emitted ones because the same energy gaps are involved. When the excited electrons eventually de-excite, they emit photons in <strong>all random directions</strong>, not in the original direction of the white light. So the original beam has those wavelengths removed.</p>
+
+  <div class="key">
+    <strong>Key distinction:</strong> Emission = bright lines on dark background (hot gas). Absorption = dark lines on continuous spectrum (white light through cool gas). Same wavelengths, opposite appearance.
+  </div>
+</div>
+
+<!-- B7 -->
+<div class="section" id="b7">
+  <span class="lo-tag">12.2.2.13</span>
+  <h3>Energy Levels & Photon Transitions</h3>
+
+  <p>When an electron transitions between energy levels E₁ and E₂:</p>
+  <div class="formula">
+hf = E₁ − E₂     (E₁ > E₂)
+
+Equivalently: hc/λ = E₁ − E₂
+  </div>
+
+  <h4>Reading energy level diagrams</h4>
+  <p>Energy levels are drawn as horizontal lines. Values are negative (because energy must be <em>added</em> to free the electron). The ground state is the lowest (most negative), and 0 eV means the electron is free.</p>
+
+  <h4>Example: Hydrogen energy levels</h4>
+  <p>Typical values: −13.6 eV (ground), −3.4 eV, −1.5 eV, −0.85 eV, −0.54 eV</p>
+
+  <div class="key tip">
+    <strong>For Q19 type:</strong>
+    <ul style="margin-top:0.3rem">
+      <li><strong>Longest wavelength</strong> = smallest energy difference = transition between two closest levels (e.g., −0.54 eV → −0.85 eV, ΔE = 0.31 eV)</li>
+      <li><strong>Shortest wavelength</strong> = largest energy difference = transition from highest to lowest level (e.g., −0.54 eV → −3.4 eV, ΔE = 2.86 eV)</li>
+    </ul>
+  </div>
+
+  <h4>Visible spectrum photons</h4>
+  <p>Visible light ranges from about 1.83 eV (red) to 3.66 eV (violet). To find visible transitions, calculate ALL possible energy differences and keep only those in the 1.83–3.66 eV range.</p>
+
+  <details>
+    <summary>Worked example: Transitions from levels −0.54, −0.85, −1.5, −3.4 eV</summary>
+    <div>
+      <p>All possible downward transitions to −3.4 eV:</p>
+      <ul>
+        <li>−1.50 → −3.4: ΔE = 1.9 eV ✓ (visible)</li>
+        <li>−0.85 → −3.4: ΔE = 2.55 eV ✓ (visible)</li>
+        <li>−0.54 → −3.4: ΔE = 2.86 eV ✓ (visible)</li>
+      </ul>
+      <p>Other transitions: −0.54→−1.5 = 0.96 eV (infrared), −0.85→−1.5 = 0.65 eV (infrared), −0.54→−0.85 = 0.31 eV (infrared). These are NOT visible.</p>
+    </div>
+  </details>
+
+  <h4>Hydrogen energy levels and En = E₁/n²</h4>
+  <p>For hydrogen, E₃ = E₁/9. So if the electron is in E₃ and falls to E₁ (ground state), compared to E₃ the ground state energy is: E₁ = 9 × E₃ (since E₁/E₃ = n₃²/n₁² = 9/1). So <strong>E₁ = 9E₃</strong>.</p>
+</div>
+
+<!-- B8 -->
+<div class="section" id="b8">
+  <span class="lo-tag">12.2.2.14</span>
+  <h3>Bohr's Postulates & Atomic Stability</h3>
+
+  <h4>The classical problem</h4>
+  <p>An orbiting electron is accelerating (changing direction). According to classical electromagnetism, an accelerating charge should continuously radiate energy, spiral inward, and crash into the nucleus. But atoms are stable! Classical physics couldn't explain this.</p>
+
+  <h4>Bohr's postulates</h4>
+  <ol>
+    <li><strong>First postulate:</strong> Electrons can only exist in certain stable orbits with <strong>quantised angular momentum</strong>: L = mvr = nh/(2π), where n = 1, 2, 3, ... These orbits do NOT result in energy radiation.</li>
+    <li><strong>Second postulate:</strong> When an electron transitions from one orbit to another, it emits or absorbs a photon with energy equal to the difference: <strong>hf = E₁ − E₂</strong></li>
+  </ol>
+
+  <div class="key">
+    <strong>Key exam point:</strong> The best answer describing atomic stability is: "Electrons can only exist in certain stable orbits with quantised angular momentum, and these orbits do not result in energy loss." This matches option D in Q2 of the spec.
+  </div>
+
+  <p>Note: Option A mentions de Broglie wavelengths — Bohr's original postulate was about angular momentum, but the connection to standing waves (integer wavelengths fitting the orbit circumference) provides an alternative justification. However, the core of Bohr's model is <strong>quantised angular momentum and no radiation in stable orbits</strong>.</p>
+</div>
+
+
+<!-- ======================== UNIT C ======================== -->
+<div class="unit-header c" id="unit-c">
+  <h2>Unit C — Nuclear Physics</h2>
+  <p>α-scattering, radioactive decay, nuclear energy, binding energy, half-life</p>
+</div>
+
+<!-- C1 -->
+<div class="section" id="c1">
+  <span class="lo-tag">12.2.3.1</span>
+  <h3>α-Particle Scattering & The Nucleus</h3>
+
+  <h4>Rutherford, Geiger & Marsden's experiment (1911)</h4>
+  <p>A beam of α-particles was fired at thin gold foil. Observations:</p>
+  <ol>
+    <li><strong>Most α-particles passed straight through</strong> → The atom is mostly empty space</li>
+    <li><strong>A small number were deflected at small angles</strong> → There is a concentration of positive charge</li>
+    <li><strong>Very few (~1 in 8000–20000) were deflected &gt; 90° (backscattered)</strong> → The positive charge and most of the mass is concentrated in a tiny, dense <strong>nucleus</strong></li>
+  </ol>
+
+  <h4>Conclusions</h4>
+  <ul>
+    <li>The atom is mostly <strong>empty space</strong> (most particles pass through)</li>
+    <li>The nucleus is <strong>very small</strong> compared to the atom (~10⁻¹⁵ m vs ~10⁻¹⁰ m)</li>
+    <li>The nucleus is <strong>positively charged</strong> (repels α-particles)</li>
+    <li>The nucleus contains <strong>most of the atom's mass</strong></li>
+  </ul>
+
+  <div class="key">
+    <strong>Q7 type:</strong> The α-scattering experiment provides information about the <strong>structure of the nucleus</strong> — specifically its small size and positive charge. (Not binding energy, not electron energy levels.)
+  </div>
+
+  <h4>Why faster α-particles get closer to the nucleus</h4>
+  <p>Faster α-particles have <strong>more kinetic energy</strong>. As they approach the nucleus, their KE converts to electrical potential energy (due to electrostatic repulsion). Faster particles have more KE to "spend" against the repulsive force, so they can get closer before being turned back.</p>
+
+  <h4>Trajectories of α-particles</h4>
+  <ul>
+    <li><strong>Direct head-on</strong>: bounces straight back (180°)</li>
+    <li><strong>Close pass</strong>: deflected through a large angle — curved path</li>
+    <li><strong>Distant pass</strong>: very slight deflection or none</li>
+  </ul>
+</div>
+
+<!-- C2 -->
+<div class="section" id="c2">
+  <span class="lo-tag">12.2.3.6 / 12.2.3.7</span>
+  <h3>Conservation Laws & Nuclear Equations</h3>
+
+  <h4>Three quantities conserved in nuclear processes</h4>
+  <ol>
+    <li><strong>Nucleon number (A)</strong> — total number of protons + neutrons</li>
+    <li><strong>Proton number (Z)</strong> — also means charge is conserved</li>
+    <li><strong>Mass-energy</strong> — total mass + energy is constant (E = mc²)</li>
+  </ol>
+
+  <h4>Writing nuclear equations</h4>
+  <p>Format: ᴬ_Z X where A = nucleon number (top), Z = proton number (bottom)</p>
+
+  <div class="formula">
+α decay: ²³⁸₉₂U → ²³⁴₉₀Th + ⁴₂He
+  A: 238 = 234 + 4  ✓    Z: 92 = 90 + 2  ✓
+
+β⁻ decay: ¹⁴₆C → ¹⁴₇N + ⁰₋₁e + ν̄
+  A: 14 = 14 + 0   ✓    Z: 6 = 7 + (−1)  ✓
+
+β⁺ decay: ¹₁p → ¹₀n + ⁰₊₁e + ν
+  A: 1 = 1 + 0     ✓    Z: 1 = 0 + 1     ✓
+  </div>
+
+  <details>
+    <summary>Worked example: Q1 — Finding X in the uranium fission equation</summary>
+    <div>
+      <p>²³⁵₉₂U + ¹₀n → ⁹⁵₄₂Mo + ¹³⁹₅₇La + X(¹₀n) + 7(⁰₋₁e)</p>
+      <p>Nucleon numbers: 235 + 1 = 95 + 139 + X×1 + 7×0</p>
+      <p>236 = 234 + X → <strong>X = 2</strong></p>
+      <p>Check proton numbers: 92 + 0 = 42 + 57 + 0 + 7×(−1) = 99 − 7 = 92 ✓</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Worked example: Q11 — Finding X for aluminium + alpha</summary>
+    <div>
+      <p>ˣ₁₃Al + ⁴₂He → ³⁰₁₅P + ¹₀n</p>
+      <p>Z: 13 + 2 = 15 + 0 ✓</p>
+      <p>A: X + 4 = 30 + 1 → X = <strong>27</strong></p>
+    </div>
+  </details>
+</div>
+
+<!-- C3 -->
+<div class="section" id="c3">
+  <span class="lo-tag">12.2.3.9</span>
+  <h3>Nature & Properties of α, β, γ Radiations</h3>
+
+  <table class="info-table">
+    <tr><th>Property</th><th>α (alpha)</th><th>β⁻ (beta-minus)</th><th>γ (gamma)</th></tr>
+    <tr><td>Identity</td><td>Helium-4 nucleus (2p + 2n)</td><td>Electron</td><td>EM radiation (photon)</td></tr>
+    <tr><td>Charge</td><td>+2e</td><td>−e</td><td>0</td></tr>
+    <tr><td>Mass</td><td>4u (heaviest)</td><td>~1/1840 u</td><td>0</td></tr>
+    <tr><td>Speed</td><td>~10⁶ m/s (slow)</td><td>~10⁸ m/s (fast)</td><td>3 × 10⁸ m/s</td></tr>
+    <tr><td>Ionising power</td><td><strong>Strongest</strong></td><td>Medium</td><td>Weakest</td></tr>
+    <tr><td>Penetrating power</td><td>Paper / few cm air</td><td>Few mm aluminium</td><td>Several cm lead</td></tr>
+    <tr><td>Deflection in E/B fields</td><td>Small deflection (heavy)</td><td>Large deflection (light)</td><td>None</td></tr>
+  </table>
+
+  <div class="key">
+    <strong>Most penetrating = γ</strong> (because it's least ionising — it loses energy slowly).
+    <strong>Most ionising = α</strong> (because it's heavy, slow, and highly charged — interacts strongly with matter).
+  </div>
+
+  <p>In β⁻ decay, an <strong>antineutrino</strong> is also emitted. This explains why β-particles have a range of energies — the energy is shared between the electron and the antineutrino. The antineutrino carries away the "missing" energy and momentum.</p>
+</div>
+
+<!-- C4 -->
+<div class="section" id="c4">
+  <span class="lo-tag">12.2.3.11</span>
+  <h3>β Decay Using the Quark Model</h3>
+
+  <h4>β⁻ decay (neutron → proton)</h4>
+  <div class="formula">
+Neutron (udd) → Proton (uud) + electron + antineutrino
+
+A down quark changes into an up quark:
+d → u + e⁻ + ν̄ₑ
+  </div>
+  <p>This is mediated by the <strong>weak nuclear force</strong> (via a W⁻ boson).</p>
+
+  <h4>β⁺ decay (proton → neutron)</h4>
+  <div class="formula">
+Proton (uud) → Neutron (udd) + positron + neutrino
+
+An up quark changes into a down quark:
+u → d + e⁺ + νₑ
+  </div>
+
+  <div class="key warn">
+    <strong>Q10 type trap:</strong> A neutron decays into a proton by emitting an <strong>electron and an antineutrino</strong> (not a neutrino, not a positron), with quark composition changing from <strong>udd to uud</strong>. This matches option A in the spec: "emitting a positron and a neutrino" is WRONG for β⁻. Watch the wording carefully! The correct answer for neutron decay is: electron + antineutrino, udd → uud.
+  </div>
+
+  <div class="key tip">
+    <strong>Q15 type:</strong> When β⁻ particles are emitted with a range of energies, <strong>antineutrinos</strong> must also be emitted (to conserve energy and momentum). For β⁺ decay, neutrinos are emitted.
+  </div>
+</div>
+
+<!-- C5 -->
+<div class="section" id="c5">
+  <span class="lo-tag">12.2.3.8</span>
+  <h3>Spontaneous & Random Nature of Decay</h3>
+
+  <h4>Spontaneous means:</h4>
+  <ul>
+    <li>The decay is <strong>not affected by external conditions</strong> (temperature, pressure, chemical reactions)</li>
+    <li>The decay of one nucleus is <strong>not affected by</strong> the presence of other nuclei</li>
+    <li>There is no way to trigger or prevent it</li>
+  </ul>
+
+  <h4>Random means:</h4>
+  <ul>
+    <li>It is <strong>impossible to predict</strong> which specific nucleus will decay next, or when</li>
+    <li>Each nucleus has the <strong>same probability of decaying</strong> per unit time</li>
+    <li>A nucleus does not "age" — a nucleus that hasn't decayed in 1000 years is no more likely to decay in the next second than a freshly formed one</li>
+  </ul>
+
+  <div class="key">
+    <strong>Evidence for randomness:</strong> Fluctuations in count rate measured by a Geiger counter. The clicks are irregular and unpredictable, even though the average rate is stable.
+  </div>
+</div>
+
+<!-- C6 -->
+<div class="section" id="c6">
+  <span class="lo-tag">12.2.3.12 / 12.2.3.13</span>
+  <h3>Mass-Energy, Mass Defect & Binding Energy</h3>
+
+  <h4>Einstein's mass-energy equivalence</h4>
+  <div class="formula">
+E = mc²    or for changes:    ΔE = Δm × c²
+  </div>
+
+  <h4>Mass defect (Δm)</h4>
+  <p>The mass of a nucleus is <strong>always less</strong> than the total mass of its separate individual nucleons. This "missing mass" is the <strong>mass defect</strong>.</p>
+  <div class="formula">
+Δm = (Z × mₚ + N × mₙ) − m_nucleus
+
+where Z = proton number, N = neutron number, mₚ = proton mass, mₙ = neutron mass
+  </div>
+  <p>The "lost" mass has been converted into <strong>binding energy</strong> — the energy that holds the nucleus together.</p>
+
+  <h4>Binding energy</h4>
+  <p>The <strong>binding energy</strong> is the minimum energy needed to completely separate a nucleus into individual protons and neutrons. It equals the energy equivalent of the mass defect:</p>
+  <div class="formula">
+Binding Energy = Δm × c²
+  </div>
+
+  <h4>Binding energy per nucleon</h4>
+  <p>To compare stability of different nuclei, we use <strong>binding energy per nucleon = BE / A</strong></p>
+  <ul>
+    <li><strong>Higher BE per nucleon = more stable</strong></li>
+    <li><strong>Iron-56</strong> has the highest BE per nucleon (~8.8 MeV) — most stable nucleus</li>
+    <li>Light nuclei (H, He) have lower BE per nucleon</li>
+    <li>Very heavy nuclei (U) also have lower BE per nucleon than iron</li>
+  </ul>
+
+  <h4>Converting atomic mass units to energy</h4>
+  <div class="formula">
+1 u = 1.661 × 10⁻²⁷ kg
+
+Energy equivalent of 1 u:
+E = 1.661×10⁻²⁷ × (3.00×10⁸)² = 1.494×10⁻¹⁰ J
+
+In MeV: 1.494×10⁻¹⁰ / 1.60×10⁻¹³ ≈ 934 MeV
+
+So: 1 u ≈ 934 MeV (accept 931–934 MeV)
+  </div>
+
+  <details>
+    <summary>Worked example: Q17c — D-T fusion energy calculation</summary>
+    <div>
+      <p><strong>(i) Energy equivalent of 1 u:</strong></p>
+      <p>E = mc² = 1.66×10⁻²⁷ × (3.00×10⁸)² = 1.494×10⁻¹⁰ J</p>
+      <p>Convert to MeV: 1.494×10⁻¹⁰ / 1.60×10⁻¹³ = <strong>934 MeV</strong></p>
+      <p><strong>(ii) Energy released in D-T reaction:</strong></p>
+      <p>²₁H + ³₁H → ⁴₂He + ¹₀n</p>
+      <p>Mass before = 2.01356 + 3.01551 = 5.02907 u</p>
+      <p>Mass after = 4.00151 + 1.00867 = 5.01018 u</p>
+      <p>Δm = 5.02907 − 5.01018 = 0.01889 u</p>
+      <p>Energy = 0.01889 × 934 = <strong>17.6 MeV</strong></p>
+    </div>
+  </details>
+</div>
+
+<!-- C7 -->
+<div class="section" id="c7">
+  <span class="lo-tag">12.2.3.15</span>
+  <h3>Nuclear Fusion & Fission via Binding Energy</h3>
+
+  <h4>Nuclear fusion</h4>
+  <p>Two <strong>light nuclei</strong> combine to form a heavier nucleus. The products have <strong>higher binding energy per nucleon</strong> → energy is released.</p>
+  <div class="formula">
+Example: ²₁H + ¹₁H → ³₂He + energy
+
+Light nuclei (left of Fe on BE curve) move RIGHT 
+→ higher BE per nucleon → energy released
+  </div>
+  <p>This is how the Sun works. It requires extremely high temperatures (~10⁷ K) because the nuclei must overcome their <strong>electrostatic repulsion</strong> (both positive). At such temperatures, nuclei have enough kinetic energy to get close enough for the strong nuclear force to take over.</p>
+
+  <h4>Nuclear fission</h4>
+  <p>A <strong>heavy nucleus</strong> splits into two lighter fragments. The products have <strong>higher binding energy per nucleon</strong> → energy is released.</p>
+  <div class="formula">
+Example: ²³⁵₉₂U + ¹₀n → fragments + neutrons + energy
+
+Heavy nuclei (right of Fe on BE curve) move LEFT
+→ higher BE per nucleon → energy released
+  </div>
+
+  <div class="key">
+    <strong>Both fusion and fission release energy because the products are more tightly bound</strong> (higher BE per nucleon) than the reactants. The "hill" of the BE per nucleon curve peaks at iron-56 — fusion works for nuclei lighter than iron, fission works for nuclei heavier than iron.
+  </div>
+
+  <h4>Why high temperature is needed for fusion</h4>
+  <p>Both nuclei are positively charged → strong electrostatic repulsion. At very high temperatures, the nuclei have enough kinetic energy to overcome this repulsion and get close enough (~10⁻¹⁵ m) for the short-range strong nuclear force to bind them.</p>
+</div>
+
+<!-- C8 -->
+<div class="section" id="c8">
+  <span class="lo-tag">12.2.3.16 / 12.2.3.17 / 12.2.3.18 / 12.2.3.19</span>
+  <h3>Activity, Decay Constant & Half-Life</h3>
+
+  <h4>Decay constant (λ)</h4>
+  <p>The <strong>probability that an individual nucleus will decay per unit time</strong>. Units: s⁻¹ (or min⁻¹, year⁻¹).</p>
+
+  <h4>Activity (A)</h4>
+  <p>The <strong>rate of decay</strong> — number of disintegrations per second. Measured in <strong>becquerels (Bq)</strong> where 1 Bq = 1 decay/s.</p>
+  <div class="formula">
+A = λN
+
+A = activity (Bq)
+λ = decay constant (s⁻¹)
+N = number of undecayed nuclei
+  </div>
+
+  <h4>Half-life (t₁/₂)</h4>
+  <p>The <strong>mean time taken for half of the active nuclei</strong> in a sample to decay. Also: the time for the activity to halve.</p>
+  <div class="formula important">
+λ × t₁/₂ = ln 2 ≈ 0.693
+
+t₁/₂ = 0.693 / λ
+λ = 0.693 / t₁/₂
+  </div>
+
+  <h4>Exponential decay equations</h4>
+  <div class="formula">
+N = N₀ × e^(−λt)     (undecayed nuclei)
+A = A₀ × e^(−λt)     (activity)
+R = R₀ × e^(−λt)     (count rate)
+  </div>
+
+  <h4>Finding N from mass</h4>
+  <p>To find the number of nuclei from a given mass:</p>
+  <div class="formula">
+N = (mass / molar mass) × Nₐ
+
+where Nₐ = 6.02 × 10²³ mol⁻¹ (Avogadro's number)
+  </div>
+
+  <details>
+    <summary>Worked example: Q21 — Half-life of Americium-241</summary>
+    <div>
+      <p>Given: mass = 5.1 μg = 5.1×10⁻⁶ g, A = 5.9×10⁵ Bq, molar mass = 241 g/mol</p>
+      <p><strong>Step 1:</strong> Find N</p>
+      <p>N = (5.1×10⁻⁶ / 241) × 6.02×10²³ = 1.274×10¹⁶</p>
+      <p><strong>Step 2:</strong> Find λ</p>
+      <p>A = λN → λ = A/N = 5.9×10⁵ / 1.274×10¹⁶ = 4.63×10⁻¹¹ s⁻¹</p>
+      <p><strong>Step 3:</strong> Find t₁/₂</p>
+      <p>t₁/₂ = 0.693 / 4.63×10⁻¹¹ = 1.497×10¹⁰ s</p>
+      <p>Convert to years: 1.497×10¹⁰ / (365.25 × 24 × 3600) = <strong>~474 years</strong></p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Worked example: Q22b — Decay constant of Strontium-90</summary>
+    <div>
+      <p>Given: t₁/₂ = 28.0 years</p>
+      <p>Convert to seconds: 28.0 × 365.25 × 24 × 3600 = 8.836×10⁸ s</p>
+      <p>λ = 0.693 / 8.836×10⁸ = <strong>7.84×10⁻¹⁰ s⁻¹</strong></p>
+    </div>
+  </details>
+
+  <div class="key tip">
+    <strong>Half-life definition:</strong> "The time required for the number of undecayed nuclei (or the activity) to reduce to half its initial value." Both parts (what reduces, by how much) should be stated for full marks.
+  </div>
+
+  <div class="key">
+    <strong>Decay constant definition:</strong> "The probability of decay of a nucleus per unit time." Both "probability" and "per unit time" are needed.
+  </div>
+</div>
+
+<!-- EXAM STRATEGY -->
+<div class="unit-header" id="strategy" style="border-bottom-color:var(--accent4);">
+  <h2 style="color:var(--accent4);">Exam Strategy & Quick Reference</h2>
+  <p>Last-minute tips and common traps</p>
+</div>
+
+<div class="section">
+  <h3>MCQ Quick Answers Guide</h3>
+  <p>These are the logical patterns behind the MCQ answers in the spec. Don't memorize — <em>understand why</em>.</p>
+
+  <table class="info-table">
+    <tr><th>#</th><th>Topic</th><th>Key reasoning</th></tr>
+    <tr><td>1</td><td>Nuclear equation (find X)</td><td>Balance nucleon numbers on both sides</td></tr>
+    <tr><td>2</td><td>Bohr's postulates</td><td>Quantised angular momentum, no energy loss in stable orbits</td></tr>
+    <tr><td>3</td><td>Most penetrating radiation</td><td>γ > β > α in penetration</td></tr>
+    <tr><td>4</td><td>Work function definition</td><td>Minimum energy to remove an electron from the metal surface</td></tr>
+    <tr><td>5</td><td>Photon energy</td><td>E = hf, plug in numbers</td></tr>
+    <tr><td>6</td><td>Velocity selector</td><td>E and B must give opposing forces on the ion</td></tr>
+    <tr><td>7</td><td>α-scattering tells us about</td><td>Structure/size of the nucleus</td></tr>
+    <tr><td>8</td><td>Electron transition downward</td><td>Emits photon with E = energy difference</td></tr>
+    <tr><td>9</td><td>E₃ to ground state energy</td><td>En = E₁/n², so E₁ = 9E₃</td></tr>
+    <tr><td>10</td><td>Neutron decay quarks</td><td>udd→uud, emits e⁻ + antineutrino (watch: option A says positron — that would be wrong for β⁻)</td></tr>
+    <tr><td>11</td><td>Nuclear equation (find X)</td><td>Balance nucleon numbers: X + 4 = 30 + 1</td></tr>
+    <tr><td>12</td><td>Work function vs intensity</td><td>Φ depends on individual photon energy; current depends on photon number</td></tr>
+    <tr><td>13</td><td>Fundamental charge from data</td><td>Find GCD of all given charges</td></tr>
+    <tr><td>14</td><td>Method for v and E of electrons</td><td>CRT — accelerate through known voltage</td></tr>
+    <tr><td>15</td><td>β⁻ + range of energies → ?</td><td>Antineutrinos also emitted (share energy)</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h3>Common Calculation Methods</h3>
+
+  <h4>1. Photoelectric calculations</h4>
+  <div class="formula">
+Threshold wavelength: λ₀ = hc/Φ
+Max KE: Eₖ = hf − Φ = hc/λ − Φ
+Max speed: v = √(2Eₖ/m)
+  </div>
+
+  <h4>2. de Broglie</h4>
+  <div class="formula">
+λ = h/(mv)
+If accelerated from rest through V: eV = ½mv²
+→ v = √(2eV/m)
+→ λ = h/√(2meV)
+  </div>
+
+  <h4>3. Energy level transitions</h4>
+  <div class="formula">
+ΔE = E_upper − E_lower  (always positive)
+f = ΔE / h
+λ = hc / ΔE
+  </div>
+
+  <h4>4. Binding energy</h4>
+  <div class="formula">
+Δm = (Z×mₚ + N×mₙ) − m_nucleus
+BE = Δm × c²
+BE per nucleon = BE / A
+  </div>
+
+  <h4>5. Radioactive decay</h4>
+  <div class="formula">
+λ = 0.693 / t₁/₂
+A = λN
+N = N₀ e^(−λt)
+N (from mass) = (mass/molar_mass) × Nₐ
+  </div>
+</div>
+
+<div class="section">
+  <h3>Unit Conversions Cheat Sheet</h3>
+  <table class="info-table">
+    <tr><th>From</th><th>To</th><th>Operation</th></tr>
+    <tr><td>eV</td><td>J</td><td>× 1.60 × 10⁻¹⁹</td></tr>
+    <tr><td>J</td><td>eV</td><td>÷ 1.60 × 10⁻¹⁹</td></tr>
+    <tr><td>MeV</td><td>J</td><td>× 1.60 × 10⁻¹³</td></tr>
+    <tr><td>u</td><td>kg</td><td>× 1.661 × 10⁻²⁷</td></tr>
+    <tr><td>u</td><td>MeV</td><td>× 931.5</td></tr>
+    <tr><td>nm</td><td>m</td><td>× 10⁻⁹</td></tr>
+    <tr><td>μg</td><td>kg</td><td>× 10⁻⁹</td></tr>
+    <tr><td>years</td><td>s</td><td>× 3.156 × 10⁷</td></tr>
+  </table>
+</div>
+
+<div style="text-align:center; padding:3rem 0 4rem; color:var(--text-dim); font-size:0.85rem;">
+  <p style="font-family:'IBM Plex Mono',monospace;">Built for last-minute mastery. Good luck tomorrow.</p>
+</div>
+
+</div><!-- container -->
+</body>
+</html>
